@@ -1,1 +1,73 @@
-<p>admin-products works!</p>
+<p>
+  <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
+</p>
+
+<!-- <p>
+  <input
+    #query
+    (keyup)="filter(query.value)"
+    type="text" class="form-control" placeholder="Search...">
+</p> -->
+
+<!-- [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" -->
+
+<!-- <table   class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of products">
+      <td>{{ p?.title }}</td>
+      <td>{{ p?.price }}</td>
+      <td>
+        <a [routerLink]="['/admin/products/', p?.id]">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+<!-- padding: 8px; margin: 15px auto; width: 30%;
+class="form-control" -->
+<div class="container h-100 d-flex justify-content-end">
+  <p>
+    <input
+      #query
+      (keyup)="filter(query.value)"
+      type="text" class="form-control" placeholder="Search...">
+  </p> 
+</div>
+
+<ngx-datatable
+        class="material striped"
+        [rows]="filteredProducts"
+        [columnMode]="ColumnMode.force"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="50"
+        [scrollbarV]="false"
+        [sorts]="[{ prop: 'name', dir: 'desc' }]"
+        [limit]="3"
+      >
+
+      <ngx-datatable-column name="Title">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.title }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Price">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.price }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Status">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a [routerLink]="['/admin/products/', row.id]">Edit</a>
+        </ng-template>
+      </ngx-datatable-column>
+    
+    </ngx-datatable>
+
+

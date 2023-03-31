@@ -24,6 +24,21 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from './auth-guard.service';
 import { UserService } from './user.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
+import { FormsModule } from '@angular/forms';
+import { ProductService } from './product.service';
+import { CustomFormsModule } from 'ng2-validation';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { ShoppingCartService } from './shopping-cart.service';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/en-NG';
+
+
+registerLocaleData(localeFr, 'ng');
 
 @NgModule({
   declarations: [
@@ -37,7 +52,11 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
     MyOrdersComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,
@@ -45,13 +64,26 @@ import { AdminAuthGuard } from './admin-auth-guard.service';
     NgbModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    FormsModule,
+    CustomFormsModule,
+    NgxDatatableModule.forRoot({
+      messages: {
+        emptyMessage: 'No data to display', // Message to show when array is presented, but contains no values
+        totalMessage: 'total', // Footer total message
+        selectedMessage: 'selected' // Footer selected message
+      }
+    })
+    
   ],
   providers: [
     AuthService,
     AuthGuard,
     UserService,
-    AdminAuthGuard
+    AdminAuthGuard,
+    CategoryService,
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })
